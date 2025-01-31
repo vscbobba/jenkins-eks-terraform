@@ -1,0 +1,37 @@
+# Deploy EBS CSI Driver
+kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=master"
+
+# Verify ebs-csi pods running
+kubectl get pods -n kube-system
+
+
+----------------------------------------------
+
+kubctl apply -f storageclass.yml
+kubctl apply -f pvc.yml
+kubectl apply -f UserManagement-ConfigMap.yml
+
+now pvc wil create and waiting for PV 
+
+----------------------------------------------
+
+now run
+kubectl apply -f mysql.yml
+kubectl apply -f service.yml
+
+pv and pvc will bound
+
+------------------------------------------------------
+
+connnect to DB
+
+# Connect to MYSQL Database
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -pdbpassword11
+
+[or]
+
+# Use mysql client latest tag
+kubectl run -it --rm --image=mysql:latest --restart=Never mysql-client -- mysql -h mysql -pdbpassword11
+
+# Verify usermgmt schema got created which we provided in ConfigMap
+mysql> show schemas;
