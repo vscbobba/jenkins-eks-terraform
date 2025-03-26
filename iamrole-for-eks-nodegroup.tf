@@ -32,7 +32,7 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEBSCSIDriverPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
   role       = aws_iam_role.eks_nodegroup_role.name
 }
-resource "aws_iam_role_policy_attachment" "eks-AmazonEBSCSIDriverPolicy" {
+resource "aws_iam_role_policy_attachment" "eks-AmazonEBSCSIDriverPolicy_nodes" {
   policy_arn = "arn:aws:iam::aws:policy/AutoScalingFullAccess"
   role       = aws_iam_role.eks_nodegroup_role.name
 }
